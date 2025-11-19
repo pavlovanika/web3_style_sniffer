@@ -87,8 +87,11 @@ def main() -> int:
     results = compute_all_scores(privacy, soundness)
 
     # Optional top-N limiting
-    if args.limit > 0:
+    if args.limit < 0:
+        print(f"WARNING: --limit {args.limit} is negative; ignoring.")
+    elif args.limit > 0:
         results = results[: args.limit]
+
 
     if args.json:
         # In JSON mode we just dump the list of result dicts.
