@@ -3,6 +3,7 @@ import json
 from typing import List, Dict
 
 from app import STYLES, Style, score  # type: ignore
+Result = Dict[str, object]
 
 
 def parse_args() -> argparse.Namespace:
@@ -39,7 +40,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
+def print_table(results: List[Result], privacy: int, soundness: int) -> None:
     """Compute fit scores for all styles defined in app.STYLES."""
     results: List[Dict] = []
     for style in STYLES.values():
