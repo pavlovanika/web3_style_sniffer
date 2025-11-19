@@ -13,6 +13,7 @@ class Style:
     soundness_focus: float   # 0–1
     description: str
 
+STYLE_KEYS = ("aztec", "zama", "soundness")
 
 STYLES: Dict[str, Style] = {
     "aztec": Style(
