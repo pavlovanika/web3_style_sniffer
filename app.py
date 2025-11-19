@@ -83,6 +83,12 @@ def parse_args() -> argparse.Namespace:
         default="aztec",
         help="Base style profile (aztec, zama, soundness).",
     )
+        p.add_argument(
+        "--brief",
+        action="store_true",
+        help="Print a single-line human summary instead of full description.",
+    )
+
     p.add_argument(
         "--privacy",
         type=int,
@@ -112,6 +118,12 @@ def print_human(result: Dict) -> None:
     print(f"Fit score   : {result['fitScore']:.3f}")
     print(f"Fit label   : {result['fitLabel']}")
 
+def print_brief(result: Dict) -> None:
+    print(
+        f"{result['style']} | privacy={result['privacyNeed']}/10 "
+        f"soundness={result['soundnessNeed']}/10 | "
+        f"fit={result['fitScore']:.3f} ({result['fitLabel']})"
+    )
 
 def main() -> None:
     args = parse_args()
