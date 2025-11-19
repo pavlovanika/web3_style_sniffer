@@ -83,6 +83,12 @@ def parse_args() -> argparse.Namespace:
         default="aztec",
         help="Base style profile (aztec, zama, soundness).",
     )
+        p.add_argument(
+        "--list-styles",
+        action="store_true",
+        help="List available style keys and exit.",
+    )
+
     p.add_argument(
         "--privacy",
         type=int,
@@ -116,6 +122,11 @@ def print_human(result: Dict) -> None:
 def main() -> None:
     args = parse_args()
     style = STYLES[args.style]
+    if args.list_styles:
+        print("Available styles:")
+        for key, style in STYLES.items():
+            print(f"  {key:10s} - {style.name}")
+        return
 
     result = score(style, args.privacy, args.soundness)
 
