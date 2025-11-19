@@ -83,6 +83,12 @@ def parse_args() -> argparse.Namespace:
         default="aztec",
         help="Base style profile (aztec, zama, soundness).",
     )
+        p.add_argument(
+        "--explain-labels",
+        action="store_true",
+        help="Print a short explanation of fit labels.",
+    )
+
     p.add_argument(
         "--privacy",
         type=int,
@@ -111,14 +117,23 @@ def print_human(result: Dict) -> None:
     print(f"Needs -> privacy: {result['privacyNeed']}/10  soundness: {result['soundnessNeed']}/10")
     print(f"Fit score   : {result['fitScore']:.3f}")
     print(f"Fit label   : {result['fitLabel']}")
+    if result.get("explainLabels"):
+        print("")
+        print("Label legend:")
+        print("  excellent : strong match to requested privacy/soundness.")
+        print("  good      : solid match with minor tradeoffs.")
+        print("  fair      : usable but with clear compromises.")
+        print("  weak      : poor match; consider a different style.")
 
 
 def main() -> None:
     args = parse_args()
     style = STYLES[args.style]
 
-    result = score(style, args.privacy, args.soundness)
 
+ result = score(style, args.privacy, args.soundness)
+    if args.explain_labels:
+        result["explainLabels"] = True
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
