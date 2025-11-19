@@ -116,6 +116,9 @@ def print_human(result: Dict) -> None:
 def main() -> None:
     args = parse_args()
     style = STYLES[args.style]
+    privacy = max(0, min(10, args.privacy))
+    soundness = max(0, min(10, args.soundness))
+
 
     result = score(style, args.privacy, args.soundness)
 
