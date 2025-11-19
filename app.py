@@ -115,6 +115,10 @@ def print_human(result: Dict) -> None:
 
 def main() -> None:
     args = parse_args()
+        if not (0 <= args.privacy <= 10):
+        raise SystemExit("ERROR: --privacy must be between 0 and 10 (inclusive).")
+    if not (0 <= args.soundness <= 10):
+        raise SystemExit("ERROR: --soundness must be between 0 and 10 (inclusive).")
     style = STYLES[args.style]
 
     result = score(style, args.privacy, args.soundness)
