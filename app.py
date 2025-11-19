@@ -77,6 +77,12 @@ def parse_args() -> argparse.Namespace:
         prog="web3_style_sniffer",
         description="Tiny Web3 style sniffer inspired by Aztec, Zama, and soundness-focused stacks.",
     )
+        p.add_argument(
+        "--no-unicode",
+        action="store_true",
+        help="Disable Unicode symbols in human-readable output.",
+    )
+
     p.add_argument(
         "--style",
         choices=list(STYLES.keys()),
@@ -103,8 +109,9 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def print_human(result: Dict) -> None:
-    print("🧪 web3_style_sniffer")
+def print_human(result: Dict, use_unicode: bool = True) -> None:
+       header = "🧪 web3_style_sniffer" if use_unicode else "web3_style_sniffer"
+    print(header)
     print(f"Style       : {result['name']} ({result['style']})")
     print(f"Description : {result['description']}")
     print("")
@@ -121,8 +128,9 @@ def main() -> None:
 
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
-    else:
-        print_human(result)
+     else:
+        print_human(result, use_unicode=not args.no_unicode)
+
 
 
 if __name__ == "__main__":
