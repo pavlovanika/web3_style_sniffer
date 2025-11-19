@@ -13,6 +13,12 @@ def parse_args() -> argparse.Namespace:
             "defined in web3_style_sniffer (Aztec, Zama, soundness-first, etc.)."
         ),
     )
+        parser.add_argument(
+        "--reverse",
+        action="store_true",
+        help="Reverse the sort order (e.g. show worst fits first).",
+    )
+
     parser.add_argument(
         "--privacy",
         type=int,
@@ -39,7 +45,15 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
+def compute_all_scores(privacy: int, soundness: int, sort_by: str = "fit", reverse: bool = False) -> List[Dict]:
+    ...
+    if sort_by == "name":
+        results.sort(key=lambda r: r["name"].lower(), reverse=reverse)
+    else:
+        # default sort: best fit first (reverse=True), but allow override
+        results.sort(key=lambda r: r["fitScore"], reverse=(not reverse if sort_by == "fit" else reverse))
+    return results
+
     """Compute fit scores for all styles defined in app.STYLES."""
     results: List[Dict] = []
     for style in STYLES.values():
