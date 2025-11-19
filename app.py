@@ -13,7 +13,7 @@ class Style:
     soundness_focus: float   # 0–1
     description: str
 
-
+# Known style profiles keyed by CLI-friendly identifiers.
 STYLES: Dict[str, Style] = {
     "aztec": Style(
         key="aztec",
