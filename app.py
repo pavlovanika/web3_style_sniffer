@@ -44,8 +44,20 @@ def clamp(x: float) -> float:
 
 
 def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
+    """
+    Compute a fit score for a given style vs. requested privacy/soundness needs.
+
+    Args:
+        style: The Style profile to score.
+        need_privacy: Desired privacy level on a 0–10 scale.
+        need_soundness: Desired soundness/proofs level on a 0–10 scale.
+
+    Returns:
+        A dict with style metadata and a normalized fit score + label.
+    """
     p_need = clamp(need_privacy / 10.0)
     s_need = clamp(need_soundness / 10.0)
+
 
     privacy_match = 1.0 - abs(p_need - style.privacy_focus)
     soundness_match = 1.0 - abs(s_need - style.soundness_focus)
