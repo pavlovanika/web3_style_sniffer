@@ -7,11 +7,15 @@ from typing import Dict
 
 @dataclass
 class Style:
+    """
+    A Web3 design style profile describing privacy/soundness emphasis.
+    """
     key: str
     name: str
     privacy_focus: float     # 0–1
     soundness_focus: float   # 0–1
     description: str
+
 
 
 STYLES: Dict[str, Style] = {
