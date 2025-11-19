@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from typing import Dict
 
 
