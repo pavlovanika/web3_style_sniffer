@@ -4,6 +4,9 @@ from typing import List, Dict
 
 from app import STYLES, Style, score  # type: ignore
 
+# Example:
+#   python compare_styles.py --privacy 9 --soundness 8 --limit 2
+def parse_args() -> argparse.Namespace:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
