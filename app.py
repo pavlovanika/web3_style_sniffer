@@ -53,13 +53,13 @@ def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
     fit = clamp(0.55 * soundness_match + 0.45 * privacy_match)
 
     if fit >= 0.8:
-        label = "excellent"
+        label = "EXCELLENT"
     elif fit >= 0.6:
-        label = "good"
+        label = "GOOD"
     elif fit >= 0.4:
-        label = "fair"
+        label = "FAIR"
     else:
-        label = "weak"
+        label = "WEAK"
 
     return {
         "style": style.key,
@@ -111,6 +111,7 @@ def print_human(result: Dict) -> None:
     print(f"Needs -> privacy: {result['privacyNeed']}/10  soundness: {result['soundnessNeed']}/10")
     print(f"Fit score   : {result['fitScore']:.3f}")
     print(f"Fit label   : {result['fitLabel']}")
+    print(f"Fit label   : {result['fitLabel'].lower()}")
 
 
 def main() -> None:
