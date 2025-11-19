@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass, asdict
 from typing import Dict
 
-
+__version__ = "0.1.0"
 @dataclass
 class Style:
     key: str
@@ -77,6 +77,12 @@ def parse_args() -> argparse.Namespace:
         prog="web3_style_sniffer",
         description="Tiny Web3 style sniffer inspired by Aztec, Zama, and soundness-focused stacks.",
     )
+        p.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+
     p.add_argument(
         "--style",
         choices=list(STYLES.keys()),
