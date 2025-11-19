@@ -1,3 +1,12 @@
+"""
+compare_styles.py
+
+Companion CLI for web3_style_sniffer.
+
+Compare your privacy/soundness needs against all configured styles and
+see which one fits best. Outputs UTF-8 text by default.
+"""
+
 import argparse
 import json
 from typing import List, Dict
