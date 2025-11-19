@@ -107,10 +107,12 @@ def print_human(result: Dict) -> None:
     print("🧪 web3_style_sniffer")
     print(f"Style       : {result['name']} ({result['style']})")
     print(f"Description : {result['description']}")
+    print(f"Profile     : privacy {result['stylePrivacyFocus']:.2f}  soundness {result['styleSoundnessFocus']:.2f}")
     print("")
     print(f"Needs -> privacy: {result['privacyNeed']}/10  soundness: {result['soundnessNeed']}/10")
     print(f"Fit score   : {result['fitScore']:.3f}")
     print(f"Fit label   : {result['fitLabel']}")
+
 
 
 def main() -> None:
