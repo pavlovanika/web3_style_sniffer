@@ -47,7 +47,9 @@ def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
         # style, name, description, privacyNeed, soundnessNeed, fitScore, fitLabel
         result = score(style, privacy, soundness)
         results.append(result)
-
+        
+    # Each result dict is expected to contain at least:
+    #   style, name, privacyNeed, soundnessNeed, fitScore, fitLabel
     # Sort by descending fitScore
     results.sort(key=lambda r: r["fitScore"], reverse=True)
     return results
