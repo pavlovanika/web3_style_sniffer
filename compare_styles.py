@@ -6,6 +6,9 @@ from app import STYLES, Style, score  # type: ignore
 
 
 def parse_args() -> argparse.Namespace:
+    """
+    Parse command-line arguments for the compare_styles CLI.
+    """
     parser = argparse.ArgumentParser(
         prog="compare_styles",
         description=(
