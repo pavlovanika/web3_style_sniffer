@@ -83,6 +83,12 @@ def parse_args() -> argparse.Namespace:
         default="aztec",
         help="Base style profile (aztec, zama, soundness).",
     )
+        p.add_argument(
+        "--style-info",
+        action="store_true",
+        help="Print the selected style's raw profile (JSON) and exit.",
+    )
+
     p.add_argument(
         "--privacy",
         type=int,
@@ -116,6 +122,16 @@ def print_human(result: Dict) -> None:
 def main() -> None:
     args = parse_args()
     style = STYLES[args.style]
+    if args.style_info:
+        info = {
+            "key": style.key,
+            "name": style.name,
+            "description": style.description,
+            "privacyFocus": style.privacy_focus,
+            "soundnessFocus": style.soundness_focus,
+        }
+        print(json.dumps(info, indent=2))
+        return
 
     result = score(style, args.privacy, args.soundness)
 
