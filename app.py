@@ -67,9 +67,12 @@ def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
         "description": style.description,
         "privacyNeed": need_privacy,
         "soundnessNeed": need_soundness,
+        "stylePrivacyFocus": style.privacy_focus,
+        "styleSoundnessFocus": style.soundness_focus,
         "fitScore": round(fit, 3),
         "fitLabel": label,
     }
+
 
 
 def parse_args() -> argparse.Namespace:
