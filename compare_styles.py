@@ -64,9 +64,10 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
         return
 
     # Header
-    header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':10s}"
+    header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':8s}"
+    underline = "-" * len(header)
     print(header)
-    print("-" * len(header))
+    print(underline)
 
     # Rows
     for r in results:
