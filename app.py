@@ -61,15 +61,18 @@ def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
     else:
         label = "weak"
 
-    return {
+       return {
         "style": style.key,
         "name": style.name,
         "description": style.description,
+        "stylePrivacyFocus": style.privacy_focus,
+        "styleSoundnessFocus": style.soundness_focus,
         "privacyNeed": need_privacy,
         "soundnessNeed": need_soundness,
         "fitScore": round(fit, 3),
         "fitLabel": label,
     }
+
 
 
 def parse_args() -> argparse.Namespace:
