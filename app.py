@@ -40,7 +40,11 @@ STYLES: Dict[str, Style] = {
 
 
 def clamp(x: float) -> float:
+    """
+    Clamp a float to the inclusive range [0.0, 1.0].
+    """
     return max(0.0, min(1.0, x))
+
 
 
 def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
