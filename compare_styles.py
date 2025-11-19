@@ -49,7 +49,8 @@ def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
         results.append(result)
 
     # Sort by descending fitScore
-    results.sort(key=lambda r: r["fitScore"], reverse=True)
+   # Case-insensitive name fallback if fitScore ties
+results.sort(key=lambda r: ( -r["fitScore"], r["name"].lower() ))
     return results
 
 
