@@ -40,13 +40,16 @@ def summarize_solidity(path: Path) -> None:
 
     lines = text.splitlines()
 
-    total_lines = len(lines)
-    comment_lines = 0
+       comment_lines = 0
+    natspec_lines = 0
     code_lines = 0
     blank_lines = 0
 
+
     for line in lines:
         kind = classify_line(line)
+                if line.strip().startswith("///"):
+            natspec_lines += 1
         if kind == "blank":
             blank_lines += 1
         elif kind == "comment":
@@ -78,6 +81,7 @@ def summarize_solidity(path: Path) -> None:
 
     # Print summary
     print(f"File: {path}")
+    print(f"  NatSpec  : {natspec_lines}")
     print("=== LINES ===")
     print(f"  Total    : {total_lines}")
     print(f"  Code     : {code_lines}")
