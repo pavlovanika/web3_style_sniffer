@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 from typing import Dict
 
-
+SOL_SUFFIX = ".sol"
 FUNC_RE = re.compile(r"\bfunction\b\s+([A-Za-z0-9_]+)?\s*\(")
 VISIBILITIES = ["public", "external", "internal", "private"]
 MUTABILITIES = ["view", "pure", "payable"]
@@ -108,7 +108,7 @@ def main() -> None:
     if not path.is_file():
         raise SystemExit(f"ERROR: file not found: {path}")
 
-    if path.suffix.lower() != ".sol":
+       if path.suffix.lower() != SOL_SUFFIX:
         print("⚠️  Note: file does not have .sol extension (still trying).")
 
     summarize_solidity(path)
