@@ -4,7 +4,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
 
-
+SOL_SUFFIX = ".sol"
 SMELLS = {
     "tx.origin": "Using tx.origin for auth",
     "selfdestruct": "Self-destructing contract",
@@ -67,6 +67,7 @@ def main() -> None:
     total_files = len(files)
     files_with_smells = 0
     agg_counts = defaultdict(int)
+    if path.suffix.lower() != SOL_SUFFIX:
 
     print(f"Scanning {total_files} Solidity files under: {root}\n")
 
