@@ -41,6 +41,7 @@ def find_sol_files(root: Path) -> List[Path]:
 
 
 def scan_file(path: Path) -> Dict[str, int]:
+    """Return a mapping of smell pattern -> count for a single Solidity file."""
     text = path.read_text(encoding="utf-8", errors="ignore")
     counts: Dict[str, int] = {}
     lower = text.lower()
