@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Dict, List
 
 
+# Ordered top-level smells (dict preserves insertion order in modern Python)
 SMELLS = {
     "tx.origin": "Using tx.origin for auth",
     "selfdestruct": "Self-destructing contract",
