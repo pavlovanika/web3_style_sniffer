@@ -11,9 +11,11 @@ MUTABILITIES = ["view", "pure", "payable"]
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Quick Solidity style summary (web3_style_sniffer helper)."
+       parser = argparse.ArgumentParser(
+        description="Quick Solidity style summary (web3_style_sniffer helper).",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
+
     parser.add_argument(
         "file",
         help="Path to a Solidity source file (.sol).",
