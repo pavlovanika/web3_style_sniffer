@@ -105,7 +105,15 @@ def main() -> None:
     args = parse_args()
     path = Path(args.file)
 
-    if not path.is_file():
+      if args.file == "-":
+        # Read from stdin to a temporary string
+        from io import StringIO
+        import sys as _sys
+
+        text = _sys.stdin.read()
+        summarize_solidity_from_text(text, source="<stdin>")
+        return
+
         raise SystemExit(f"ERROR: file not found: {path}")
 
     if path.suffix.lower() != ".sol":
