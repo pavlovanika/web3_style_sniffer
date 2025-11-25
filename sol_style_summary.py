@@ -26,6 +26,8 @@ def classify_line(line: str) -> str:
     if not stripped:
         return "blank"
     if stripped.startswith("//"):
+            if stripped.startswith("///"):
+        # Solidity NatSpec comments
         return "comment"
     if stripped.startswith("/*") or stripped.startswith("*") or stripped.endswith("*/"):
         return "comment"
