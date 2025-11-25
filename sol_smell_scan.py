@@ -68,7 +68,7 @@ def main() -> None:
     files_with_smells = 0
     agg_counts = defaultdict(int)
 
-    print(f"Scanning {total_files} Solidity files under: {root}\n")
+      print(f"Scanning {total_files} Solidity files under: {root.resolve()}\n")
 
     for path in files:
         smells = scan_file(path)
