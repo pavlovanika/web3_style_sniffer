@@ -28,6 +28,11 @@ def parse_args() -> argparse.Namespace:
         default="contracts",
         help="Root directory to search for .sol files (default: ./contracts).",
     )
+        parser.add_argument(
+        "--include-tests",
+        action="store_true",
+        help="Also scan files under test/ and tests/ directories explicitly (future extension).",
+    )
     parser.add_argument(
         "--show-clean",
         action="store_true",
