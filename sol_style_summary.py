@@ -18,6 +18,12 @@ def parse_args() -> argparse.Namespace:
         "file",
         help="Path to a Solidity source file (.sol).",
     )
+        parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="Only print one-line summary (file + totals).",
+    )
+
     return parser.parse_args()
 
 
@@ -32,7 +38,7 @@ def classify_line(line: str) -> str:
     return "code"
 
 
-def summarize_solidity(path: Path) -> None:
+def summarize_solidity(path: Path, quiet: bool = False) -> None:
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as e:
@@ -75,6 +81,9 @@ def summarize_solidity(path: Path) -> None:
         for m in MUTABILITIES:
             if f" {m} " in lowered:
                 mutability_counts[m] += 1
+    if quiet:
+        print(f"{path}: total={total_lines} code={code_lines} comments={comment_lines} blank={blank_lines}")
+        return
 
     # Print summary
     print(f"File: {path}")
