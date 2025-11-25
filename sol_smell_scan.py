@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+sol_summary.py — Tiny helper to summarize Solidity source:
+line stats + function visibility/mutability counts.
+"""
 import argparse
 from collections import defaultdict
 from pathlib import Path
