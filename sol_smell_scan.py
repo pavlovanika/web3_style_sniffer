@@ -41,7 +41,13 @@ def find_sol_files(root: Path) -> List[Path]:
 
 
 def scan_file(path: Path) -> Dict[str, int]:
-    text = path.read_text(encoding="utf-8", errors="ignore")
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError as e:
+        print(f"ERROR: could not read {path}: {e}")
+        return {}
+
+
     counts: Dict[str, int] = {}
     lower = text.lower()
 
