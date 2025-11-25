@@ -84,8 +84,8 @@ def summarize_solidity(path: Path) -> None:
     print(f"  Comments : {comment_lines}")
     print(f"  Blank    : {blank_lines}")
     if total_lines:
-        comment_ratio = 100.0 * comment_lines / total_lines
-        print(f"  Comment% : {comment_ratio:.1f}%")
+            comment_ratio = 100.0 * comment_lines / total_lines
+        print(f"  Comment %: {comment_ratio:.1f}%")
 
     print("\n=== FUNCTIONS ===")
     print(f"  Total functions: {func_count}")
