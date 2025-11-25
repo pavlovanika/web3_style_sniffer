@@ -3,6 +3,12 @@ import argparse
 import re
 from pathlib import Path
 from typing import Dict
+__all__ = [
+    "parse_args",
+    "classify_line",
+    "summarize_solidity",
+    "main",
+]
 
 
 FUNC_RE = re.compile(r"\bfunction\b\s+([A-Za-z0-9_]+)?\s*\(")
