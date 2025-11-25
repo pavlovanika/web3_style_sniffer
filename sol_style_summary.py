@@ -6,8 +6,12 @@ from typing import Dict
 
 
 FUNC_RE = re.compile(r"\bfunction\b\s+([A-Za-z0-9_]+)?\s*\(")
+# Solidity function visibility keywords we scan for:
 VISIBILITIES = ["public", "external", "internal", "private"]
+
+# Solidity function mutability keywords we scan for:
 MUTABILITIES = ["view", "pure", "payable"]
+
 
 
 def parse_args() -> argparse.Namespace:
