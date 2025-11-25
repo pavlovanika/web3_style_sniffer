@@ -33,6 +33,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Also print files that have no detected smells.",
     )
+        parser.add_argument(
+        "--pattern",
+        help="Only report smells whose pattern or description contains this substring (case-insensitive).",
+    )
+
     return parser.parse_args()
 
 
@@ -63,6 +68,7 @@ def main() -> None:
     files = find_sol_files(root)
     if not files:
         raise SystemExit(f"No .sol files found under: {root}")
+    pattern_filter = args.pattern.lower() if args.pattern else None
 
     total_files = len(files)
     files_with_smells = 0
@@ -75,6 +81,10 @@ def main() -> None:
         if smells:
             files_with_smells += 1
             print(f"⚠ {path}:")
+                        if pattern_filter:
+                desc = SMELLS[pattern]
+                if pattern_filter not in pattern.lower() and pattern_filter not in desc.lower():
+                    continue
             for pattern, count in smells.items():
                 desc = SMELLS[pattern]
                 agg_counts[pattern] += count
