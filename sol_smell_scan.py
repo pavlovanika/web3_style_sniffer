@@ -33,6 +33,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Also print files that have no detected smells.",
     )
+        parser.add_argument(
+        "--include-tests",
+        action="store_true",
+        help="Also scan files under test/ and tests/ directories explicitly (future extension).",
+    )
+
     return parser.parse_args()
 
 
