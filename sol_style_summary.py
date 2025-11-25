@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+sol_summary.py — Tiny Solidity style/shape sniffing helper.
+
+Counts code/comment/blank lines and basic function visibility/mutability stats.
+"""
 import argparse
 import re
 from pathlib import Path
