@@ -23,8 +23,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Scan Solidity contracts for common code smells."
     )
-    parser.add_argument(
-        "--root",
+       parser.add_argument(
+        "-r", "--root",
         default="contracts",
         help="Root directory to search for .sol files (default: ./contracts).",
     )
