@@ -18,6 +18,12 @@ def parse_args() -> argparse.Namespace:
         "file",
         help="Path to a Solidity source file (.sol).",
     )
+        parser.add_argument(
+        "--no-header",
+        action="store_true",
+        help="Do not print the 'File: ...' header line.",
+    )
+
     return parser.parse_args()
 
 
@@ -77,7 +83,8 @@ def summarize_solidity(path: Path) -> None:
                 mutability_counts[m] += 1
 
     # Print summary
-    print(f"File: {path}")
+     if not getattr(summarize_solidity, "_no_header", False):
+        print(f"File: {path}")
     print("=== LINES ===")
     print(f"  Total    : {total_lines}")
     print(f"  Code     : {code_lines}")
