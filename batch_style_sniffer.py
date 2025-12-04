@@ -96,6 +96,18 @@ def parse_args() -> argparse.Namespace:
         help="Output JSON instead of a human-readable table.",
     )
     return parser.parse_args()
+    
+def parse_score(value: str, field_name: str) -> float:
+    try:
+        score = float(value)
+    except ValueError as exc:
+        raise ValueError(f"{field_name} must be a number, got: {value!r}") from exc
+
+    if not (0.0 <= score <= 10.0):
+        raise ValueError(
+            f"{field_name} must be between 0 and 10 (inclusive), got: {score}"
+        )
+    return score
 
 
 def load_projects_from_csv(path: str) -> List[Tuple[str, float, float]]:
@@ -119,11 +131,11 @@ def load_projects_from_csv(path: str) -> List[Tuple[str, float, float]]:
                     if not name:
                         raise ValueError("empty project name")
 
-                    privacy_str = (row.get("privacy") or "").strip()
+                                      privacy_str = (row.get("privacy") or "").strip()
                     soundness_str = (row.get("soundness") or "").strip()
 
-                    privacy = float(privacy_str)
-                    soundness = float(soundness_str)
+                    privacy = parse_score(privacy_str, "privacy")
+                    soundness = parse_score(soundness_str, "soundness")
                 except Exception as exc:  # noqa: BLE001
                     raise ValueError(
                         f"Error parsing row {idx}: {exc}. "
