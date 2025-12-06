@@ -89,16 +89,21 @@ def parse_args() -> argparse.Namespace:
             "Reads a CSV file with columns: name, privacy, soundness."
         )
     )
-    parser.add_argument(
-        "--input",
-        "-i",
-        required=True,
-        help="Path to CSV file with columns: name, privacy, soundness.",
-    )
-    parser.add_argument(
+     parser.add_argument(
         "--json",
         action="store_true",
         help="Output JSON instead of a human-readable table.",
+    )
+    parser.add_argument(
+        "--sort-by",
+        choices=["name", "fit"],
+        default="name",
+        help="Sort results by project name or fit score (default: name).",
+    )
+    parser.add_argument(
+        "--desc",
+        action="store_true",
+        help="Sort in descending order (useful with --sort-by fit).",
     )
     return parser.parse_args()
     
@@ -113,6 +118,7 @@ def parse_score(value: str, field_name: str) -> float:
             f"{field_name} must be between 0 and 10 (inclusive), got: {score}"
         )
     return score
+
 
 
 def load_projects_from_csv(path: str) -> List[Tuple[str, float, float]]:
@@ -227,11 +233,18 @@ def main() -> None:
         print("No projects found in CSV (did you provide any rows?)", file=sys.stderr)
         sys.exit(2)
 
-    results = [
+        results = [
         analyze_project(name, privacy, soundness)
         for (name, privacy, soundness) in projects
     ]
     results.sort(key=lambda r: r.name)
+
+    # Sort results according to CLI options
+    if args.sort_by == "name":
+        results.sort(key=lambda r: r.name, reverse=args.desc)
+    elif args.sort_by == "fit":
+        results.sort(key=lambda r: r.fit_score, reverse=args.desc)
+
 
     if args.json:
         payload = {
