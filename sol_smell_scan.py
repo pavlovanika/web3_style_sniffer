@@ -16,6 +16,7 @@ SMELLS = {
     "blockhash": "Relying on blockhash",
     "assembly": "Inline assembly",
     "unchecked {": "Unchecked arithmetic block",
+    "require(": "require() without error message (check for missing second argument)",
 }
 
 
