@@ -6,7 +6,7 @@ import math
 import sys
 from dataclasses import dataclass, asdict
 from typing import Dict, List, Tuple
-
+__version__ = "0.1.0"
 
 # Style profiles are illustrative and match the README concept:
 # focus values are between 0.0 and 1.0 for privacy and soundness.
@@ -26,6 +26,11 @@ STYLE_PROFILES: Dict[str, Dict[str, float]] = {
         "privacy_focus": 0.4,
         "soundness_focus": 1.0,
     },
+        parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
 }
 
 
