@@ -214,6 +214,7 @@ def main() -> None:
         analyze_project(name, privacy, soundness)
         for (name, privacy, soundness) in projects
     ]
+    results.sort(key=lambda r: r.name)
 
     if args.json:
         payload = {
