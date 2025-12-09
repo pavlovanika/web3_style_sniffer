@@ -105,6 +105,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Sort in descending order (useful with --sort-by fit).",
     )
+    parser.add_argument(
+        "--list-styles",
+        action="store_true",
+        help="List available style profile keys and exit.",
+    )
     return parser.parse_args()
     
 def parse_score(value: str, field_name: str) -> float:
@@ -222,6 +227,11 @@ def format_human_table(results: List[ProjectResult]) -> str:
 
 def main() -> None:
     args = parse_args()
+    if args.list_styles:
+        print("Available style profiles:")
+        for key, profile in STYLE_PROFILES.items():
+            print(f"  {key}: {profile.get('name', '')}")
+        sys.exit(0)
 
     try:
         projects = load_projects_from_csv(args.input)
