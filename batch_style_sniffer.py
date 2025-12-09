@@ -105,6 +105,10 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Sort in descending order (useful with --sort-by fit).",
     )
+    parser.add_argument(
+        "--output",
+        help="Optional output file for JSON mode; defaults to stdout.",
+    )
     return parser.parse_args()
     
 def parse_score(value: str, field_name: str) -> float:
@@ -251,8 +255,14 @@ def main() -> None:
             "projects": [asdict(r) for r in results],
             "styles": STYLE_PROFILES,
         }
-        print(json.dumps(payload, indent=2, sort_keys=True))
+              data = json.dumps(payload, indent=2, sort_keys=True)
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(data + "\n")
+        else:
+            print(data)
         sys.exit(0)
+
 
     print("web3_style_sniffer :: batch analysis")
     print(f"Input file: {args.input}")
