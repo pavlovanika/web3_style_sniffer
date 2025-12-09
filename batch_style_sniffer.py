@@ -105,6 +105,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Sort in descending order (useful with --sort-by fit).",
     )
+    parser.add_argument(
+        "--sort-by",
+        choices=["name", "score"],
+        default="name",
+        help="Sort results by project name or fit score (desc).",
+    )
     return parser.parse_args()
     
 def parse_score(value: str, field_name: str) -> float:
@@ -237,6 +243,11 @@ def main() -> None:
         analyze_project(name, privacy, soundness)
         for (name, privacy, soundness) in projects
     ]
+            if args.sort_by == "name":
+        results.sort(key=lambda r: r.name.lower())
+    else:  # "score"
+        results.sort(key=lambda r: r.fit_score, reverse=True)
+
     results.sort(key=lambda r: r.name)
 
     # Sort results according to CLI options
