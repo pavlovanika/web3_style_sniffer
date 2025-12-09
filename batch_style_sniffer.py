@@ -101,6 +101,11 @@ def parse_args() -> argparse.Namespace:
         help="Sort results by project name or fit score (default: name).",
     )
     parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit with code 2 if any project has fit_label == 'weak'.",
+    )
+    parser.add_argument(
         "--desc",
         action="store_true",
         help="Sort in descending order (useful with --sort-by fit).",
@@ -244,6 +249,9 @@ def main() -> None:
         results.sort(key=lambda r: r.name, reverse=args.desc)
     elif args.sort_by == "fit":
         results.sort(key=lambda r: r.fit_score, reverse=args.desc)
+        if args.strict and any(r["fit_label"] == "weak" for r in payload["projects"]):
+            sys.exit(2)
+        sys.exit(0)
 
 
     if args.json:
