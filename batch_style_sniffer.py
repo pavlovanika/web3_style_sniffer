@@ -250,14 +250,18 @@ def main() -> None:
         payload = {
             "projects": [asdict(r) for r in results],
             "styles": STYLE_PROFILES,
+            "summary": label_counts,
         }
         print(json.dumps(payload, indent=2, sort_keys=True))
         sys.exit(0)
 
-    print("web3_style_sniffer :: batch analysis")
-    print(f"Input file: {args.input}")
     print()
-    print(format_human_table(results))
+    print(
+        f"Summary: excellent={label_counts['excellent']}  "
+        f"good={label_counts['good']}  "
+        f"fair={label_counts['fair']}  "
+        f"weak={label_counts['weak']}"
+    )
 
 
 if __name__ == "__main__":
