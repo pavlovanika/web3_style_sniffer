@@ -95,6 +95,11 @@ def parse_args() -> argparse.Namespace:
         help="Output JSON instead of a human-readable table.",
     )
     parser.add_argument(
+        "--csv-delimiter",
+        default=",",
+        help="CSV delimiter character (default: ',').",
+    )
+    parser.add_argument(
         "--sort-by",
         choices=["name", "fit"],
         default="name",
@@ -127,11 +132,11 @@ def parse_score(value: str, field_name: str) -> float:
 
 
 
-def load_projects_from_csv(path: str) -> List[Tuple[str, float, float]]:
+def load_projects_from_csv(path: str, delimiter: str = ",") -> List[Tuple[str, float, float]]:
     projects: List[Tuple[str, float, float]] = []
     try:
         with open(path, newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
+                     reader = csv.DictReader(f, delimiter=delimiter)
             missing_columns = {
                 col
                 for col in ("name", "privacy", "soundness")
@@ -230,7 +235,7 @@ def main() -> None:
     args = parse_args()
 
     try:
-        projects = load_projects_from_csv(args.input)
+                projects = load_projects_from_csv(args.input, delimiter=args.csv_delimiter)
     except Exception as exc:  # noqa: BLE001
         print(f"Error: {exc}", file=sys.stderr)
         sys.exit(2)
