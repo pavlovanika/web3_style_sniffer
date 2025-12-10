@@ -89,8 +89,9 @@ def main() -> None:
     print(f"Files with any smells : {files_with_smells}")
     print()
 
-    if not agg_counts:
+      if not agg_counts:
         print("No smells detected across all files 🎉")
+        print("Codebase looks clean with respect to the current smell list.")
         return
 
     print("Aggregated counts:")
