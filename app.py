@@ -37,6 +37,9 @@ STYLES: Dict[str, Style] = {
         description="Formal-spec and proof-driven protocol engineering discipline.",
     ),
 }
+# CLI entrypoint.
+if __name__ == "__main__":
+    raise SystemExit(main())
 
 
 def clamp(x: float) -> float:
