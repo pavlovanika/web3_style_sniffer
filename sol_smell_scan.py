@@ -29,6 +29,12 @@ def parse_args() -> argparse.Namespace:
         default="contracts",
         help="Root directory to search for .sol files (default: ./contracts).",
     )
+        parser.add_argument(
+        "--count-only",
+        action="store_true",
+        help="Only print total smell counts (no per-file listing).",
+    )
+
     parser.add_argument(
         "--show-clean",
         action="store_true",
@@ -73,9 +79,10 @@ def main() -> None:
 
     for path in files:
         smells = scan_file(path)
-        if smells:
+             if smells:
             files_with_smells += 1
-            print(f"⚠ {path}:")
+            if not args.count_only:
+                print(f"⚠ {path}:")
             for pattern, count in smells.items():
                 desc = SMELLS[pattern]
                 agg_counts[pattern] += count
@@ -83,6 +90,15 @@ def main() -> None:
             print()
         elif args.show_clean:
             print(f"✅ {path} (no smells detected)")
+            if not args.count_only:
+                for pattern, count in smells.items():
+                    desc = SMELLS[pattern]
+                    agg_counts[pattern] += count
+                    print(f"   - {desc} [{pattern}] (x{count})")
+                print()
+            else:
+                for pattern, count in smells.items():
+                    agg_counts[pattern] += count
 
     print("=== SUMMARY ===")
     print(f"Total files scanned   : {total_files}")
