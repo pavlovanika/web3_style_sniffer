@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+sol_smell_scanner — scan Solidity contracts for simple code smells like tx.origin, selfdestruct, etc.
+"""
 import argparse
 from collections import defaultdict
 from pathlib import Path
