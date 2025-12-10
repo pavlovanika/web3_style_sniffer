@@ -105,6 +105,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Sort in descending order (useful with --sort-by fit).",
     )
+    parser.add_argument(
+        "--min-fit",
+        type=float,
+        help="If set, only include projects with fit_score >= this threshold.",
+    )
+
     return parser.parse_args()
     
 def parse_score(value: str, field_name: str) -> float:
@@ -237,6 +243,9 @@ def main() -> None:
         analyze_project(name, privacy, soundness)
         for (name, privacy, soundness) in projects
     ]
+            if args.min_fit is not None:
+        results = [r for r in results if r.fit_score >= args.min_fit]
+
     results.sort(key=lambda r: r.name)
 
     # Sort results according to CLI options
