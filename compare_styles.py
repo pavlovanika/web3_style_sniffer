@@ -39,6 +39,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+
 def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
     """Compute fit scores for all styles defined in app.STYLES."""
     results: List[Dict] = []
@@ -99,5 +100,7 @@ def main() -> int:
     return 0
 
 
+# Entry point for CLI usage.
 if __name__ == "__main__":
     raise SystemExit(main())
+
