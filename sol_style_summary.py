@@ -68,12 +68,12 @@ def summarize_solidity(path: Path) -> None:
         func_count += 1
         lowered = line.lower()
 
-        for v in VISIBILITIES:
-            if f" {v} " in lowered:
+             for v in VISIBILITIES:
+            if re.search(rf"\b{v}\b", lowered):
                 visibility_counts[v] += 1
 
         for m in MUTABILITIES:
-            if f" {m} " in lowered:
+            if re.search(rf"\b{m}\b", lowered):
                 mutability_counts[m] += 1
 
     # Print summary
