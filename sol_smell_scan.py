@@ -117,5 +117,7 @@ def main() -> None:
             print(f" - {desc:<35} [{pattern}] : {c}")
 
 
+# CLI entrypoint: returns 0 on success, non-zero on missing root or no .sol files.
 if __name__ == "__main__":
     main()
+
