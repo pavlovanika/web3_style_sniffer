@@ -113,6 +113,10 @@ def main() -> None:
 
     summarize_solidity(path)
 
+# Exit code:
+# 0 on success, non-zero on file/IO errors.
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
