@@ -53,6 +53,7 @@ def summarize_solidity(path: Path) -> None:
             comment_lines += 1
         else:
             code_lines += 1
+    print("\nDone.")
 
     # Function stats: very lightweight regex scanning
     func_count = 0
