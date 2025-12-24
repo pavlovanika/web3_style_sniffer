@@ -32,13 +32,16 @@ def classify_line(line: str) -> str:
     return "code"
 
 
-def summarize_solidity(path: Path) -> None:
+def summarize_solidity(path: Path, skip_functions: bool = False) -> None:
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as e:
         raise SystemExit(f"ERROR: could not read {path}: {e}")
 
     lines = text.splitlines()
+    if skip_functions:
+        # Only line stats requested
+        return
 
     total_lines = len(lines)
     comment_lines = 0
