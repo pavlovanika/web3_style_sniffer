@@ -22,6 +22,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def classify_line(line: str) -> str:
+     """Classify a line as 'blank', 'comment', or 'code'."""
     stripped = line.strip()
     if not stripped:
         return "blank"
