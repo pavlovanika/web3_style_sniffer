@@ -44,7 +44,10 @@ def parse_args() -> argparse.Namespace:
 
 
 def find_sol_files(root: Path) -> List[Path]:
-    return sorted(root.rglob("*.sol"))
+    return sorted(
+        p for p in root.rglob("*.sol")
+        if "node_modules" not in p.parts
+    )
 
 
 def scan_file(path: Path) -> Dict[str, int]:
