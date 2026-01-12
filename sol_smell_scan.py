@@ -104,6 +104,9 @@ def main() -> None:
     print(f"Total files scanned   : {total_files}")
     print(f"Files with any smells : {files_with_smells}")
     print()
+            total_for_file = sum(smells.values())
+            # (Optional tiny note, kept short)
+            # print(f"   -> {total_for_file} smell occurrence(s) in this file.")
 
       if not agg_counts:
         print("No smells detected across all files 🎉")
