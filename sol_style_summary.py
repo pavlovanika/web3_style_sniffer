@@ -18,6 +18,12 @@ def parse_args() -> argparse.Namespace:
         "file",
         help="Path to a Solidity source file (.sol).",
     )
+        parser.add_argument(
+        "--no-functions",
+        action="store_true",
+        help="Skip function visibility/mutability scanning.",
+    )
+
     return parser.parse_args()
 
 
