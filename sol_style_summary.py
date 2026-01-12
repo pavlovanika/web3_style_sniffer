@@ -86,6 +86,10 @@ def summarize_solidity(path: Path) -> None:
     if total_lines:
         comment_ratio = 100.0 * comment_lines / total_lines
         print(f"  Comment% : {comment_ratio:.1f}%")
+    if total_lines == 0:
+        print(f"File: {path}")
+        print("File is empty (0 lines).")
+        return
 
     print("\n=== FUNCTIONS ===")
     print(f"  Total functions: {func_count}")
