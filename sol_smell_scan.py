@@ -4,7 +4,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
 
-
+# Map of pattern -> human-readable description for common Solidity "smells"
 SMELLS = {
     "tx.origin": "Using tx.origin for auth",
     "selfdestruct": "Self-destructing contract",
