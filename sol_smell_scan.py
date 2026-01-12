@@ -69,7 +69,7 @@ def main() -> None:
 
     files = find_sol_files(root)
     if not files:
-        raise SystemExit(f"No .sol files found under: {root}")
+        raise SystemExit(f"ERROR: no .sol files found under: {root}")
 
     total_files = len(files)
     files_with_smells = 0
