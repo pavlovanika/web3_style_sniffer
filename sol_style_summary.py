@@ -22,6 +22,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def classify_line(line: str) -> str:
+    """Return 'blank', 'comment', or 'code' for a given line of Solidity."""
     stripped = line.strip()
     if not stripped:
         return "blank"
