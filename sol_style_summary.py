@@ -102,6 +102,7 @@ def summarize_solidity(path: Path) -> None:
 
 
 def main() -> None:
+    """CLI entrypoint for quick Solidity style summary."""
     args = parse_args()
     path = Path(args.file)
 
