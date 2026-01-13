@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+web3_style_sniffer
+
+CLI toy for exploring Web3 design tradeoffs inspired by Aztec, Zama,
+and soundness-focused protocol labs.
+"""
+
 import argparse
 import json
 from dataclasses import dataclass, asdict
