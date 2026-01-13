@@ -19,6 +19,12 @@ def parse_args() -> argparse.Namespace:
         default=8,
         help="How much you need privacy (0–10, default 8).",
     )
+        parser.add_argument(
+        "--json-compact",
+        action="store_true",
+        help="Emit compact JSON without indentation.",
+    )
+
     parser.add_argument(
         "--soundness",
         type=int,
@@ -92,7 +98,11 @@ def main() -> int:
 
     if args.json:
         # In JSON mode we just dump the list of result dicts.
-        print(json.dumps(results, indent=2))
+        if args.json_compact:
+            print(json.dumps(results))
+        else:
+            print(json.dumps(results, indent=2))
+
     else:
         print_table(results, privacy, soundness)
 
