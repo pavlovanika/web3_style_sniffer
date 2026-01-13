@@ -13,6 +13,13 @@ def parse_args() -> argparse.Namespace:
             "defined in web3_style_sniffer (Aztec, Zama, soundness-first, etc.)."
         ),
     )
+        parser.add_argument(
+        "--include-style",
+        action="append",
+        metavar="STYLE_KEY",
+        help="Only include styles with the given key (can be used multiple times).",
+    )
+
     parser.add_argument(
         "--privacy",
         type=int,
@@ -39,10 +46,14 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
+def compute_all_scores(privacy: int, soundness: int, sort_by: str = "fit", reverse: bool = False,
+                       include_style: List[str] | None = None) -> List[Dict]:
     """Compute fit scores for all styles defined in app.STYLES."""
     results: List[Dict] = []
-    for style in STYLES.values():
+    for key, style in STYLES.items():
+        if include_style and key not in include_style:
+            continue
+   
         # app.score already returns a dict with fields like:
         # style, name, description, privacyNeed, soundnessNeed, fitScore, fitLabel
         result = score(style, privacy, soundness)
@@ -84,7 +95,14 @@ def main() -> int:
     privacy = max(0, min(10, args.privacy))
     soundness = max(0, min(10, args.soundness))
 
-    results = compute_all_scores(privacy, soundness)
+      results = compute_all_scores(
+        privacy,
+        soundness,
+        sort_by=args.sort_by,
+        reverse=args.reverse,
+        include_style=args.include_style,
+    )
+
 
     # Optional top-N limiting
     if args.limit > 0:
