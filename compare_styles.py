@@ -13,6 +13,13 @@ def parse_args() -> argparse.Namespace:
             "defined in web3_style_sniffer (Aztec, Zama, soundness-first, etc.)."
         ),
     )
+        parser.add_argument(
+        "--sort-by",
+        choices=("fit", "name"),
+        default="fit",
+        help="Sort styles by 'fit' (default) or 'name'.",
+    )
+
     parser.add_argument(
         "--privacy",
         type=int,
@@ -39,7 +46,8 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
+def compute_all_scores(privacy: int, soundness: int, sort_by: str = "fit") -> List[Dict]:
+
     """Compute fit scores for all styles defined in app.STYLES."""
     results: List[Dict] = []
     for style in STYLES.values():
@@ -48,9 +56,13 @@ def compute_all_scores(privacy: int, soundness: int) -> List[Dict]:
         result = score(style, privacy, soundness)
         results.append(result)
 
-    # Sort by descending fitScore
-    results.sort(key=lambda r: r["fitScore"], reverse=True)
+       if sort_by == "name":
+        results.sort(key=lambda r: r["name"].lower())
+    else:
+        # Sort by descending fitScore
+        results.sort(key=lambda r: r["fitScore"], reverse=True)
     return results
+
 
 
 def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
@@ -84,7 +96,8 @@ def main() -> int:
     privacy = max(0, min(10, args.privacy))
     soundness = max(0, min(10, args.soundness))
 
-    results = compute_all_scores(privacy, soundness)
+    results = compute_all_scores(privacy, soundness, sort_by=args.sort_by)
+
 
     # Optional top-N limiting
     if args.limit > 0:
