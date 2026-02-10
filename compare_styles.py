@@ -59,9 +59,11 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
     print(f"Needs -> privacy: {privacy}/10  soundness: {soundness}/10")
     print("")
 
-    if not results:
+       if not results:
         print("No styles available.")
+        print("-" * 40)
         return
+
 
     # Header
     header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':10s}"
