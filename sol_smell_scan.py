@@ -114,7 +114,7 @@ def main() -> None:
     for pattern, desc in SMELLS.items():
         c = agg_counts.get(pattern, 0)
         if c:
-            print(f" - {desc:<35} [{pattern}] : {c}")
+            print(f" ⚠ {desc:<35} [{pattern}] : {c}")
 
 
 if __name__ == "__main__":
