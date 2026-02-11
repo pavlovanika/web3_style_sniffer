@@ -77,12 +77,11 @@ def parse_args() -> argparse.Namespace:
         prog="web3_style_sniffer",
         description="Tiny Web3 style sniffer inspired by Aztec, Zama, and soundness-focused stacks.",
     )
-    p.add_argument(
+     p.add_argument(
+        "-s",
         "--style",
         choices=list(STYLES.keys()),
-        default="aztec",
-        help="Base style profile (aztec, zama, soundness).",
-    )
+
     p.add_argument(
         "--privacy",
         type=int,
