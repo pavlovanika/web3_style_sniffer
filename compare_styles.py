@@ -64,7 +64,7 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
         return
 
     # Header
-    header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':10s}"
+       header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':8s}"
     print(header)
     print("-" * len(header))
 
@@ -74,7 +74,7 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
         name = r["name"][:28]
         fit = f"{r['fitScore']:.3f}"
         label = r["fitLabel"]
-        print(f"{key:12s} {name:28s} {fit:6s} {label:10s}")
+              print(f"{key:12s} {name:28s} {fit:6s} {label:8s}")
 
 
 def main() -> int:
