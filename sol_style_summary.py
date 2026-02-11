@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict
 
 
-FUNC_RE = re.compile(r"\bfunction\b\s+([A-Za-z0-9_]+)?\s*\(")
+FUNC_RE = re.compile(r"\bfunction\b\s+([A-Za-z0-9_]+)?\s*\(", re.MULTILINE)
 VISIBILITIES = ["public", "external", "internal", "private"]
 MUTABILITIES = ["view", "pure", "payable"]
 
