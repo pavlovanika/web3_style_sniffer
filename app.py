@@ -77,6 +77,12 @@ def parse_args() -> argparse.Namespace:
         prog="web3_style_sniffer",
         description="Tiny Web3 style sniffer inspired by Aztec, Zama, and soundness-focused stacks.",
     )
+        p.add_argument(
+        "--json-compact",
+        action="store_true",
+        help="Emit compact JSON without indentation or key sorting.",
+    )
+
     p.add_argument(
         "--style",
         choices=list(STYLES.keys()),
@@ -120,9 +126,11 @@ def main() -> None:
     result = score(style, args.privacy, args.soundness)
 
     if args.json:
-        print(json.dumps(result, indent=2, sort_keys=True))
-    else:
-        print_human(result)
+        if args.json_compact:
+            print(json.dumps(result))
+        else:
+            print(json.dumps(result, indent=2, sort_keys=True))
+
 
 
 if __name__ == "__main__":
