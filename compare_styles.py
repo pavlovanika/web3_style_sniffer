@@ -78,6 +78,7 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
 
 
 def main() -> int:
+
     args = parse_args()
 
     # Clamp user inputs to [0, 10] but do not crash on out-of-range values.
