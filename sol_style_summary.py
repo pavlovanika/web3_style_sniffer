@@ -95,6 +95,9 @@ def summarize_solidity(path: Path) -> None:
     print("  By visibility:")
     for v in VISIBILITIES:
         print(f"    {v:8}: {visibility_counts[v]}")
+        if func_count:
+            pct = 100.0 * visibility_counts[v] / func_count
+            print(f"            ({pct:.1f}%)")
 
     print("  By mutability:")
     for m in MUTABILITIES:
