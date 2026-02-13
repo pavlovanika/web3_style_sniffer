@@ -80,9 +80,18 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
 def main() -> int:
     args = parse_args()
 
-    # Clamp user inputs to [0, 10] but do not crash on out-of-range values.
-    privacy = max(0, min(10, args.privacy))
-    soundness = max(0, min(10, args.soundness))
+      # Clamp user inputs to [0, 10] and warn if out of range.
+    privacy = args.privacy
+    soundness = args.soundness
+
+    if not (0 <= privacy <= 10):
+        print(f"WARNING: --privacy {privacy} is out of range, clamping to [0,10].")
+        privacy = max(0, min(10, privacy))
+
+    if not (0 <= soundness <= 10):
+        print(f"WARNING: --soundness {soundness} is out of range, clamping to [0,10].")
+        soundness = max(0, min(10, soundness))
+
 
     results = compute_all_scores(privacy, soundness)
 
