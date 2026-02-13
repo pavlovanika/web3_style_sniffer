@@ -36,6 +36,14 @@ STYLES: Dict[str, Style] = {
         soundness_focus=0.98,
         description="Formal-spec and proof-driven protocol engineering discipline.",
     ),
+        "balanced": Style(
+        key="balanced",
+        name="Balanced zk / soundness stack",
+        privacy_focus=0.75,
+        soundness_focus=0.75,
+        description="Balanced emphasis on privacy and soundness for general-purpose stacks.",
+    ),
+
 }
 
 
