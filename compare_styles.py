@@ -19,6 +19,12 @@ def parse_args() -> argparse.Namespace:
         default=8,
         help="How much you need privacy (0–10, default 8).",
     )
+        parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Print raw results list to stderr (JSON) for debugging.",
+    )
+
     parser.add_argument(
         "--soundness",
         type=int,
@@ -85,6 +91,9 @@ def main() -> int:
     soundness = max(0, min(10, args.soundness))
 
     results = compute_all_scores(privacy, soundness)
+    if args.debug:
+        import sys
+        print(json.dumps(results, indent=2), file=sys.stderr)
 
     # Optional top-N limiting
     if args.limit > 0:
