@@ -44,6 +44,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def find_sol_files(root: Path) -> List[Path]:
+    """Return a sorted list of all .sol files under the given root (recursive)."""
     return sorted(root.rglob("*.sol"))
 
 
