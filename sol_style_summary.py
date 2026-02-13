@@ -87,10 +87,12 @@ def summarize_solidity(path: Path) -> None:
         comment_ratio = 100.0 * comment_lines / total_lines
         print(f"  Comment% : {comment_ratio:.1f}%")
 
-    print("\n=== FUNCTIONS ===")
+     print("\n=== FUNCTIONS ===")
     print(f"  Total functions: {func_count}")
     if func_count == 0:
+        print("  (No functions detected in this file.)")
         return
+
 
     print("  By visibility:")
     for v in VISIBILITIES:
