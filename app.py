@@ -50,7 +50,8 @@ def score(style: Style, need_privacy: int, need_soundness: int) -> Dict:
     privacy_match = 1.0 - abs(p_need - style.privacy_focus)
     soundness_match = 1.0 - abs(s_need - style.soundness_focus)
 
-    fit = clamp(0.55 * soundness_match + 0.45 * privacy_match)
+      fit = clamp(0.55 * soundness_match + 0.45 * privacy_match)
+
 
     if fit >= 0.8:
         label = "excellent"
@@ -77,6 +78,12 @@ def parse_args() -> argparse.Namespace:
         prog="web3_style_sniffer",
         description="Tiny Web3 style sniffer inspired by Aztec, Zama, and soundness-focused stacks.",
     )
+        p.add_argument(
+        "--invert-weights",
+        action="store_true",
+        help="Give privacy more weight than soundness when computing fit.",
+    )
+
     p.add_argument(
         "--style",
         choices=list(STYLES.keys()),
