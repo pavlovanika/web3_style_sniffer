@@ -33,10 +33,12 @@ def classify_line(line: str) -> str:
 
 
 def summarize_solidity(path: Path) -> None:
-    try:
+     try:
         text = path.read_text(encoding="utf-8")
     except OSError as e:
+        # Surface a clear error if the file cannot be read
         raise SystemExit(f"ERROR: could not read {path}: {e}")
+
 
     lines = text.splitlines()
 
