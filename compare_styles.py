@@ -4,6 +4,7 @@ from typing import List, Dict
 
 from app import STYLES, Style, score  # type: ignore
 
+__version__ = "0.1.0"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -19,6 +20,12 @@ def parse_args() -> argparse.Namespace:
         default=8,
         help="How much you need privacy (0–10, default 8).",
     )
+        parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+
     parser.add_argument(
         "--soundness",
         type=int,
