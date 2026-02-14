@@ -22,7 +22,8 @@ SMELLS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Scan Solidity contracts for common code smells."
+        description="Scan Solidity contracts for common code smells.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "--root",
