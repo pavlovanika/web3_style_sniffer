@@ -90,9 +90,10 @@ def main() -> int:
     if args.limit > 0:
         results = results[: args.limit]
 
-    if args.json:
-        # In JSON mode we just dump the list of result dicts.
-        print(json.dumps(results, indent=2))
+  if args.json:
+    print("")  # small readability improvement
+    print(json.dumps(results, indent=2))
+
     else:
         print_table(results, privacy, soundness)
 
