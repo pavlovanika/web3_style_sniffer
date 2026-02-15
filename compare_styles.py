@@ -57,7 +57,10 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
     """Print a simple text table of all style scores."""
     print("🧪 web3_style_sniffer – style comparison")
     print(f"Needs -> privacy: {privacy}/10  soundness: {soundness}/10")
+      print("")
+    print(f"Number of styles: {len(results)}")
     print("")
+
 
     if not results:
         print("No styles available.")
