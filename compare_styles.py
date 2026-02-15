@@ -14,24 +14,29 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "-p",
         "--privacy",
         type=int,
         default=8,
         help="How much you need privacy (0–10, default 8).",
     )
     parser.add_argument(
+        "-q",
         "--soundness",
+
         type=int,
         default=7,
         help="How much you need soundness / proofs (0–10, default 7).",
     )
     parser.add_argument(
+        "-j",
         "--json",
-        action="store_true",
-        help="Emit a JSON array of style scores instead of a table.",
+
     )
     parser.add_argument(
+        "-n",
         "--limit",
+
         type=int,
         default=0,
         help="Show only the top N styles (0 = show all).",
