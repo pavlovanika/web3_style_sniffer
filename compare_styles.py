@@ -59,9 +59,17 @@ def print_table(results: List[Dict], privacy: int, soundness: int) -> None:
     print(f"Needs -> privacy: {privacy}/10  soundness: {soundness}/10")
     print("")
 
+    results: List[Dict] = []
+    for style in STYLES.values():
+      
+        results.append(result)
+
     if not results:
-        print("No styles available.")
-        return
+        return results
+
+    # Sort by descending fitScore
+    results.sort(key=lambda r: r["fitScore"], reverse=True)
+    return results
 
     # Header
     header = f"{'Style key':12s} {'Name':28s} {'Fit':6s} {'Label':10s}"
