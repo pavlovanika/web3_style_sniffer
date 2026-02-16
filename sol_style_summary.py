@@ -41,6 +41,8 @@ def summarize_solidity(path: Path) -> None:
     lines = text.splitlines()
 
     total_lines = len(lines)
+        if total_lines > 10_000:
+        print(f"⚠️  Large file detected ({total_lines} lines); results may be slower.", flush=True)
     comment_lines = 0
     code_lines = 0
     blank_lines = 0
